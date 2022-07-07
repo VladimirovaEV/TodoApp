@@ -1,6 +1,6 @@
-import {
-    user,
-} from './createElements.js';
+import {user} from './createElements.js';
+
+export const data = [];
 export const getTaskData = key => JSON.parse(localStorage.getItem(key)) || [];
 export const setTaskData = (key, obj) => {
   let newdata = getTaskData(key);
@@ -24,19 +24,28 @@ export const removeTaskData = (task) => {
 };
 export const changeTaskData = (task) => {
   const newdata = getTaskData(user);
-    newdata.forEach((data) => {
-        if (data.task === task) {
-            data['state'] = 'выполнено';
-        }
-    });
-    localStorage.setItem(user, JSON.stringify(newdata));
-}
+  newdata.forEach((data) => {
+    if (data.task === task) {
+      data['state'] = 'выполнено';
+    }
+  });
+  localStorage.setItem(user, JSON.stringify(newdata));
+};
+export const changeBackTaskData = (task) => {
+  const newdata = getTaskData(user);
+  newdata.forEach((data) => {
+    if (data.task === task) {
+      data['state'] = 'в процессе';
+    }
+  });
+  localStorage.setItem(user, JSON.stringify(newdata));
+};
 export const editTaskData = (task) => {
   const newdata = getTaskData(user);
-    newdata.forEach((data) => {
-        if (data.id === task.id) {
-            data['task'] = task.textContent;
-        }
-    });
-    localStorage.setItem(user, JSON.stringify(newdata));
+  newdata.forEach((data) => {
+    if (data.id === task.id) {
+      data['task'] = task.textContent;
+    }
+  });
+  localStorage.setItem(user, JSON.stringify(newdata));
 };
